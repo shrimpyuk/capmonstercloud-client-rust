@@ -23,8 +23,8 @@ pub enum Modules {
     UNIVERSAL,
 }
 
-// impl<'a> Into<&str> for Modules {
-//     fn into(self) -> &'a str {
+// impl Into<&str> for Modules {
+//     fn into(self) -> String {
 //         match self {
 //             Modules::AMAZON => "amazon",
 //             Modules::BOT_DETECT => "botdetect",

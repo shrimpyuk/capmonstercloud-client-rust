@@ -1,5 +1,5 @@
 use reqwestplus::header::{HeaderMap, HeaderValue};
-use reqwestplus::{Client as HttpClient, StatusCode, Url};
+use reqwestplus::{Client as HttpClient};
 
 use serde::de::DeserializeOwned;
 use serde::Serialize;
@@ -13,20 +13,20 @@ use crate::limits::{self, Limits, LimitsTrait};
 use crate::options::Options;
 use crate::requests::tasks_names::TaskReqTrait;
 use crate::requests::{CreateTaskRequest, GetBalanceRequest, GetTaskResultRequest, make_svc_request, TaskData};
+use crate::responses::SvcRespTypeTrait;
 use crate::responses::tasks_data::{GetBalanceResp, GetTaskResultResp, TaskIdResp, TaskTypeTrait};
-use crate::responses::{SvcRespTypeTrait, SvcResponse};
 use crate::task::Task;
 use crate::urls::Urls;
 
-pub(crate) struct ClientImpl<'a> {
-    pub(crate) options: Options<'a>,
+pub(crate) struct ClientImpl {
+    pub(crate) options: Options,
     http_client: HttpClient,
     urls: Urls,
 }
 
-impl<'a> ClientImpl<'a> {
+impl ClientImpl {
     pub(crate) fn new(
-        ext_options: Options<'a>,
+        ext_options: Options,
         http_client: Option<HttpClient>,
     ) -> Result<Self, ClientImplError> {
         let mut headers: HeaderMap = HeaderMap::with_capacity(1);
@@ -58,7 +58,7 @@ impl<'a> ClientImpl<'a> {
     // https://zennolab.atlassian.net/wiki/spaces/APIS/pages/655432
     pub async fn get_balance_async(&self) -> Result<f64, GetBalanceError> {
         let body = serde_json::to_string(&GetBalanceRequest {
-            clientKey: self.options.client_key,
+            clientKey: self.options.client_key.clone(),
         })
         .map_err(GetBalanceError::SerializeError)?;
 
@@ -106,7 +106,7 @@ impl<'a> ClientImpl<'a> {
         Limits<T>: LimitsTrait,
     {
         let request_data = CreateTaskRequest::new(
-            self.options.client_key,
+            self.options.client_key.clone(),
             TaskData::new(data),
             self.options.soft_id,
         );
@@ -138,7 +138,7 @@ impl<'a> ClientImpl<'a> {
         Limits<T>: LimitsTrait,
     {
         let request_data = GetTaskResultRequest {
-            clientKey: self.options.client_key,
+            clientKey: self.options.client_key.clone(),
             taskId: task.task_id,
         };
         let body = serde_json::to_string(&request_data).map_err(TaskResultError::SerializeError)?;
@@ -160,7 +160,7 @@ impl<'a> ClientImpl<'a> {
                         }
                     },
                 },
-                Err(e) => {}
+                Err(_e) => {}
             }
 
             task.check_and_wait_req_interval().await?;

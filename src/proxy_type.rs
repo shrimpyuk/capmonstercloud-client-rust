@@ -9,13 +9,13 @@ pub enum ProxyType {
     Socks5
 }
 
-impl<'a> From<ProxyType> for &'a str {
-    fn from(proxy_type: ProxyType) -> &'a str {
+impl From<ProxyType> for String {
+    fn from(proxy_type: ProxyType) -> String {
         match proxy_type {
-            ProxyType::Http => "http",
-            ProxyType::Https => "https",
-            ProxyType::Socks4 => "socks4",
-            ProxyType::Socks5 => "socks5",
+            ProxyType::Http => "http".to_string(),
+            ProxyType::Https => "https".to_string(),
+            ProxyType::Socks4 => "socks4".to_string(),
+            ProxyType::Socks5 => "socks5".to_string(),
         }
     }
 }

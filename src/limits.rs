@@ -44,7 +44,7 @@ pub(crate) trait LimitsTrait {
     fn new() -> Self;
 }
 
-impl<'a> LimitsTrait for Limits<ImageToTextTaskReq<'a>> {
+impl LimitsTrait for Limits<ImageToTextTaskReq> {
     fn new() -> Self {
         Self {
             request_interval: ITT_REQUEST_INTERVAL,
@@ -54,7 +54,7 @@ impl<'a> LimitsTrait for Limits<ImageToTextTaskReq<'a>> {
     }
 }
 
-impl<'a> LimitsTrait for Limits<NoCaptchaTaskProxylessReq<'a>> {
+impl LimitsTrait for Limits<NoCaptchaTaskProxylessReq> {
     fn new() -> Self {
         Self {
             request_interval: RC_REQUEST_INTERVAL,
@@ -64,7 +64,7 @@ impl<'a> LimitsTrait for Limits<NoCaptchaTaskProxylessReq<'a>> {
     }
 }
 
-impl<'a> LimitsTrait for Limits<NoCaptchaTaskReq<'a>> {
+impl LimitsTrait for Limits<NoCaptchaTaskReq> {
     fn new() -> Self {
         Self {
             request_interval: RC_REQUEST_INTERVAL,
@@ -74,7 +74,7 @@ impl<'a> LimitsTrait for Limits<NoCaptchaTaskReq<'a>> {
     }
 }
 
-impl<'a> LimitsTrait for Limits<RecaptchaV3TaskProxylessReq<'a>> {
+impl LimitsTrait for Limits<RecaptchaV3TaskProxylessReq> {
     fn new() -> Self {
         Self {
             request_interval: RC_REQUEST_INTERVAL,
@@ -84,7 +84,7 @@ impl<'a> LimitsTrait for Limits<RecaptchaV3TaskProxylessReq<'a>> {
     }
 }
 
-impl<'a> LimitsTrait for Limits<RecaptchaV2EnterpriseTaskReq<'a>> {
+impl LimitsTrait for Limits<RecaptchaV2EnterpriseTaskReq> {
     fn new() -> Self {
         Self {
             request_interval: RC_REQUEST_INTERVAL,
@@ -94,7 +94,7 @@ impl<'a> LimitsTrait for Limits<RecaptchaV2EnterpriseTaskReq<'a>> {
     }
 }
 
-impl<'a> LimitsTrait for Limits<RecaptchaV2EnterpriseTaskProxylessReq<'a>> {
+impl LimitsTrait for Limits<RecaptchaV2EnterpriseTaskProxylessReq> {
     fn new() -> Self {
         Self {
             request_interval: RC_REQUEST_INTERVAL,
@@ -104,7 +104,7 @@ impl<'a> LimitsTrait for Limits<RecaptchaV2EnterpriseTaskProxylessReq<'a>> {
     }
 }
 
-impl<'a> LimitsTrait for Limits<FunCaptchaTaskReq<'a>> {
+impl LimitsTrait for Limits<FunCaptchaTaskReq> {
     fn new() -> Self {
         Self {
             request_interval: FC_REQUEST_INTERVAL,
@@ -114,7 +114,7 @@ impl<'a> LimitsTrait for Limits<FunCaptchaTaskReq<'a>> {
     }
 }
 
-impl<'a> LimitsTrait for Limits<FunCaptchaTaskProxylessReq<'a>> {
+impl LimitsTrait for Limits<FunCaptchaTaskProxylessReq> {
     fn new() -> Self {
         Self {
             request_interval: FC_REQUEST_INTERVAL,
@@ -124,7 +124,7 @@ impl<'a> LimitsTrait for Limits<FunCaptchaTaskProxylessReq<'a>> {
     }
 }
 
-impl<'a> LimitsTrait for Limits<HCaptchaTaskReq<'a>> {
+impl LimitsTrait for Limits<HCaptchaTaskReq> {
     fn new() -> Self {
         Self {
             request_interval: HC_REQUEST_INTERVAL,
@@ -134,7 +134,7 @@ impl<'a> LimitsTrait for Limits<HCaptchaTaskReq<'a>> {
     }
 }
 
-impl<'a> LimitsTrait for Limits<HCaptchaTaskProxylessReq<'a>> {
+impl LimitsTrait for Limits<HCaptchaTaskProxylessReq> {
     fn new() -> Self {
         Self {
             request_interval: HC_REQUEST_INTERVAL,
@@ -144,7 +144,7 @@ impl<'a> LimitsTrait for Limits<HCaptchaTaskProxylessReq<'a>> {
     }
 }
 
-impl<'a> LimitsTrait for Limits<GeeTestTaskReq<'a>> {
+impl LimitsTrait for Limits<GeeTestTaskReq> {
     fn new() -> Self {
         Self {
             request_interval: GT_REQUEST_INTERVAL,
@@ -154,7 +154,7 @@ impl<'a> LimitsTrait for Limits<GeeTestTaskReq<'a>> {
     }
 }
 
-impl<'a> LimitsTrait for Limits<GeeTestTaskProxylessReq<'a>> {
+impl LimitsTrait for Limits<GeeTestTaskProxylessReq> {
     fn new() -> Self {
         Self {
             request_interval: GT_REQUEST_INTERVAL,
@@ -164,7 +164,7 @@ impl<'a> LimitsTrait for Limits<GeeTestTaskProxylessReq<'a>> {
     }
 }
 
-impl<'a> LimitsTrait for Limits<TurnstileTaskReq<'a>> {
+impl LimitsTrait for Limits<TurnstileTaskReq> {
     fn new() -> Self {
         Self {
             request_interval: T_REQUEST_INTERVAL,
@@ -174,7 +174,7 @@ impl<'a> LimitsTrait for Limits<TurnstileTaskReq<'a>> {
     }
 }
 
-impl<'a> LimitsTrait for Limits<TurnstileTaskProxylessReq<'a>> {
+impl LimitsTrait for Limits<TurnstileTaskProxylessReq> {
     fn new() -> Self {
         Self {
             request_interval: T_REQUEST_INTERVAL,

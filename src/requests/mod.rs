@@ -2,18 +2,18 @@
 
 use crate::error::SvcRequestError;
 use crate::requests::tasks_names::TaskReqTrait;
-use crate::responses::tasks_data::TaskTypeTrait;
-use crate::responses::{SvcRespTypeTrait, SvcResponse};
+use crate::responses::{SvcResponse, SvcRespTypeTrait};
 use reqwestplus::{Client, StatusCode, Url};
 use serde::de::DeserializeOwned;
 use serde::Serialize;
-//use tracing::warn;
+#[cfg(feature = "debug-output")]
+use tracing::warn;
 
 pub(crate) mod tasks_data;
 pub(crate) mod tasks_names;
 
 #[allow(clippy::needless_lifetimes)]
-pub(crate) async fn make_svc_request<'a, T: SvcRespTypeTrait + DeserializeOwned>(
+pub(crate) async fn make_svc_request<T: SvcRespTypeTrait + DeserializeOwned>(
     url: Url,
     body: String,
     http_client: &Client,
@@ -38,19 +38,19 @@ pub(crate) async fn make_svc_request<'a, T: SvcRespTypeTrait + DeserializeOwned>
 }
 
 #[derive(Serialize)]
-pub(crate) struct CreateTaskRequest<'a, T: TaskReqTrait> {
-    clientKey: &'a str,
-    task: TaskData<'a, T>,
-    // pub(crate) callbackUrl: Option<&'a str>,
+pub(crate) struct CreateTaskRequest<T: TaskReqTrait> {
+    clientKey: String,
+    task: TaskData<T>,
+    // pub(crate) callbackUrl: Option<String>,
     softId: u32,
 }
 
-impl<'a, T: TaskReqTrait> CreateTaskRequest<'a, T> {
+impl<'a, T: TaskReqTrait> CreateTaskRequest<T> {
     pub(crate) fn new(
-        clientKey: &'a str,
-        task: TaskData<'a, T>,
+        clientKey: String,
+        task: TaskData<T>,
         softId: u32,
-    ) -> CreateTaskRequest<'a, T> {
+    ) -> CreateTaskRequest<T> {
         Self {
             clientKey,
             task,
@@ -60,29 +60,29 @@ impl<'a, T: TaskReqTrait> CreateTaskRequest<'a, T> {
 }
 
 #[derive(Serialize)]
-pub(crate) struct TaskData<'a, T: TaskReqTrait> {
+pub(crate) struct TaskData<T: TaskReqTrait> {
     #[serde(rename = "type")]
-    typ: &'a str,
+    typ: String,
     #[serde(flatten)]
     flat_data: T,
 }
 
-impl<'a, T: TaskReqTrait> TaskData<'a, T> {
+impl<'a, T: TaskReqTrait> TaskData<T> {
     pub(crate) fn new(flatten: T) -> Self {
         Self {
-            typ: flatten.get_task_name(),
+            typ: flatten.get_task_name().to_string(),
             flat_data: flatten,
         }
     }
 }
 
 #[derive(Serialize)]
-pub(crate) struct GetBalanceRequest<'a> {
-    pub(crate) clientKey: &'a str,
+pub(crate) struct GetBalanceRequest {
+    pub(crate) clientKey: String,
 }
 
 #[derive(Serialize)]
-pub(crate) struct GetTaskResultRequest<'a> {
-    pub(crate) clientKey: &'a str,
+pub(crate) struct GetTaskResultRequest {
+    pub(crate) clientKey: String,
     pub(crate) taskId: u32,
 }

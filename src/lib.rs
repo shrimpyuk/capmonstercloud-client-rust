@@ -20,20 +20,20 @@ mod task;
 mod tests;
 mod urls;
 
-pub struct CapMonsterCloudClient<'a> {
-    client: ClientImpl<'a>,
+pub struct CapMonsterCloudClient {
+    client: ClientImpl,
 }
 
-impl<'a> CapMonsterCloudClient<'a> {
+impl CapMonsterCloudClient {
     /// Creates new capmonster.cloud сlient
-    pub fn new(client_key: &'a str) -> Result<Self, CapMonsterCloudClientError> {
+    pub fn new(client_key: String) -> Result<Self, CapMonsterCloudClientError> {
         let options = Options::new(client_key)?;
         Self::new_ex(options, None)
     }
     
     /// Creates new capmonster.cloud сlient with additional options
     pub fn new_ex(
-        client_options: Options<'a>,
+        client_options: Options,
         http_client: Option<reqwestplus::Client>,
     ) -> Result<Self, CapMonsterCloudClientError> {
         
@@ -86,7 +86,7 @@ impl<'a> CapMonsterCloudClient<'a> {
     /// https://zennolab.atlassian.net/wiki/x/bQAK
     pub async fn image_to_text_task(
         &self,
-        data: ImageToTextTaskReq<'a>,
+        data: ImageToTextTaskReq,
     ) -> Result<ImageToTextTaskResp, SolveError> {
         self.client.solve_impl(data).await
     }
@@ -110,7 +110,7 @@ impl<'a> CapMonsterCloudClient<'a> {
     /// https://zennolab.atlassian.net/wiki/x/AQA_Fg
     pub async fn no_captcha_task_proxyless(
         &self,
-        data: NoCaptchaTaskProxylessReq<'a>,
+        data: NoCaptchaTaskProxylessReq,
     ) -> Result<NoCaptchaTaskProxylessResp, SolveError> {
         self.client.solve_impl(data).await
     }
@@ -118,7 +118,7 @@ impl<'a> CapMonsterCloudClient<'a> {
     /// https://zennolab.atlassian.net/wiki/x/FYCSK
     pub async fn no_captcha_task(
         &self,
-        data: NoCaptchaTaskReq<'a>,
+        data: NoCaptchaTaskReq,
     ) -> Result<NoCaptchaTaskResp, SolveError> {
         self.client.solve_impl(data).await
     }
@@ -126,7 +126,7 @@ impl<'a> CapMonsterCloudClient<'a> {
     /// https://zennolab.atlassian.net/wiki/x/EoDJIQ
     pub async fn recaptcha_v3_task_proxyless(
         &self,
-        data: RecaptchaV3TaskProxylessReq<'a>,
+        data: RecaptchaV3TaskProxylessReq,
     ) -> Result<RecaptchaV3TaskProxylessResp, SolveError> {
         self.client
             .solve_impl(data)
@@ -136,7 +136,7 @@ impl<'a> CapMonsterCloudClient<'a> {
     /// https://zennolab.atlassian.net/wiki/x/AYDigQ
     pub async fn recaptcha_v2_enterprise_task(
         &self,
-        data: RecaptchaV2EnterpriseTaskReq<'a>,
+        data: RecaptchaV2EnterpriseTaskReq,
     ) -> Result<RecaptchaV2EnterpriseTaskResp, SolveError> {
         self.client
             .solve_impl(data)
@@ -146,7 +146,7 @@ impl<'a> CapMonsterCloudClient<'a> {
     /// https://zennolab.atlassian.net/wiki/x/FYDXgQ
     pub async fn recaptcha_v2_enterprise_task_proxyless(
         &self,
-        data: RecaptchaV2EnterpriseTaskProxylessReq<'a>,
+        data: RecaptchaV2EnterpriseTaskProxylessReq,
     ) -> Result<RecaptchaV2EnterpriseTaskProxylessResp, SolveError> {
         self.client
             .solve_impl(data)
@@ -156,7 +156,7 @@ impl<'a> CapMonsterCloudClient<'a> {
     /// https://zennolab.atlassian.net/wiki/x/OYDbKw
     pub async fn funcaptcha_task(
         &self,
-        data: FunCaptchaTaskReq<'a>,
+        data: FunCaptchaTaskReq,
     ) -> Result<FunCaptchaTaskResp, SolveError> {
         self.client.solve_impl(data).await
     }
@@ -164,7 +164,7 @@ impl<'a> CapMonsterCloudClient<'a> {
     /// https://zennolab.atlassian.net/wiki/x/FwBdJg
     pub async fn funcaptcha_task_proxyless(
         &self,
-        data: FunCaptchaTaskProxylessReq<'a>,
+        data: FunCaptchaTaskProxylessReq,
     ) -> Result<FunCaptchaTaskProxylessResp, SolveError> {
         self.client
             .solve_impl(data)
@@ -174,7 +174,7 @@ impl<'a> CapMonsterCloudClient<'a> {
     /// https://zennolab.atlassian.net/wiki/x/HAC4Rw
     pub async fn hcaptcha_task(
         &self,
-        data: HCaptchaTaskReq<'a>,
+        data: HCaptchaTaskReq,
     ) -> Result<HCaptchaTaskResp, SolveError> {
         self.client.solve_impl(data).await
     }
@@ -197,7 +197,7 @@ impl<'a> CapMonsterCloudClient<'a> {
     /// https://zennolab.atlassian.net/wiki/x/EQC4Rw
     pub async fn hcaptcha_task_proxyless(
         &self,
-        data: HCaptchaTaskProxylessReq<'a>,
+        data: HCaptchaTaskProxylessReq,
     ) -> Result<HCaptchaTaskProxylessResp, SolveError> {
         self.client.solve_impl(data).await
     }
@@ -205,7 +205,7 @@ impl<'a> CapMonsterCloudClient<'a> {
     /// https://zennolab.atlassian.net/wiki/x/J4Cncw
     pub async fn geetest_task(
         &self,
-        data: GeeTestTaskReq<'a>,
+        data: GeeTestTaskReq,
     ) -> Result<GeeTestTaskResp, SolveError> {
         self.client.solve_impl(data).await
     }
@@ -213,7 +213,7 @@ impl<'a> CapMonsterCloudClient<'a> {
     /// https://zennolab.atlassian.net/wiki/x/KoCmcw
     pub async fn geetest_task_proxyless(
         &self,
-        data: GeeTestTaskProxylessReq<'a>,
+        data: GeeTestTaskProxylessReq,
     ) -> Result<GeeTestTaskProxylessResp, SolveError> {
         self.client.solve_impl(data).await
     }
@@ -221,7 +221,7 @@ impl<'a> CapMonsterCloudClient<'a> {
     /// https://zennolab.atlassian.net/wiki/x/CoCShg
     pub async fn turnstile_task(
         &self,
-        data: TurnstileTaskReq<'a>,
+        data: TurnstileTaskReq,
     ) -> Result<TurnstileTaskResp, SolveError> {
         self.client.solve_impl(data).await
     }
@@ -229,7 +229,7 @@ impl<'a> CapMonsterCloudClient<'a> {
     /// https://zennolab.atlassian.net/wiki/x/B4CUhg
     pub async fn turnstile_task_proxyless(
         &self,
-        data: TurnstileTaskProxylessReq<'a>,
+        data: TurnstileTaskProxylessReq,
     ) -> Result<TurnstileTaskProxylessResp, SolveError> {
         self.client.solve_impl(data).await
     }

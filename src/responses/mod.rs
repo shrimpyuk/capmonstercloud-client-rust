@@ -1,14 +1,13 @@
 #![allow(non_snake_case)]
 
-use reqwestplus::StatusCode;
+
 use serde::de::DeserializeOwned;
-use serde::Deserialize;
 use std::fmt::Debug;
 use std::marker::PhantomData;
 #[cfg(feature = "debug-output")]
 use tracing::warn;
 
-use crate::error::response_error::*;
+
 use crate::error::SvcResponseError;
 
 pub(crate) mod tasks_data;
