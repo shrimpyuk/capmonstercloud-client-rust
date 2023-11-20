@@ -1,4 +1,4 @@
-use reqwest::Url;
+use reqwestplus::Url;
 
 pub(crate) struct Urls {
     balance_url: Url,

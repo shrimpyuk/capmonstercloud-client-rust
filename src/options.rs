@@ -1,4 +1,4 @@
-use reqwest::Url;
+use reqwestplus::Url;
 
 use crate::error::OptionsError::{self, UrlParseError};
 

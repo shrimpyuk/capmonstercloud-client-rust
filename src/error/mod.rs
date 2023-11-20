@@ -1,6 +1,6 @@
 #![allow(clippy::enum_variant_names)]
 
-use reqwest::StatusCode;
+use reqwestplus::StatusCode;
 use crate::error::response_error::ResponseError;
 
 pub mod response_error;
@@ -24,13 +24,13 @@ impl From<OptionsError> for CapMonsterCloudClientError {
 
 #[derive(Debug)]
 pub enum ClientImplError {
-    HttpClientCreationError(reqwest::Error),
+    HttpClientCreationError(reqwestplus::Error),
 }
 
 #[derive(Debug)]
 pub enum SvcRequestError {
     SerializeError(serde_json::Error),
-    PostRequestError(reqwest::Error),
+    PostRequestError(reqwestplus::Error),
     NonSuccessRespStatus(StatusCode),
 }
 
@@ -38,14 +38,14 @@ pub enum SvcRequestError {
 pub enum SvcResponseError {
     SerializeError(serde_json::Error),
     DeserializeError(serde_json::Error),
-    RespToStringError(reqwest::Error),
+    RespToStringError(reqwestplus::Error),
 }
 
 #[derive(Debug)]
 pub enum DeserializeError {
     SerializeError(serde_json::Error),
     DeserializeError(serde_json::Error),
-    RespToStringError(reqwest::Error),
+    RespToStringError(reqwestplus::Error),
 }
 
 #[derive(Debug)]

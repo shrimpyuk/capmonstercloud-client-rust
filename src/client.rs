@@ -1,5 +1,5 @@
-use reqwest::header::{HeaderMap, HeaderValue};
-use reqwest::{Client as HttpClient, StatusCode, Url};
+use reqwestplus::header::{HeaderMap, HeaderValue};
+use reqwestplus::{Client as HttpClient, StatusCode, Url};
 
 use serde::de::DeserializeOwned;
 use serde::Serialize;
@@ -43,7 +43,7 @@ impl<'a> ClientImpl<'a> {
         Ok(Self {
             options: ext_options,
             http_client: http_client.unwrap_or(
-                reqwest::ClientBuilder::new()
+                reqwestplus::ClientBuilder::new()
                     .default_headers(headers)
                     .timeout(limits::REQUEST_TIMEOUT)
                     .http2_keep_alive_interval(limits::HTTP2_KEEP_ALIVE_INTERVAL)

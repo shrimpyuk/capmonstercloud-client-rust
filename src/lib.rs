@@ -34,7 +34,7 @@ impl<'a> CapMonsterCloudClient<'a> {
     /// Creates new capmonster.cloud сlient with additional options
     pub fn new_ex(
         client_options: Options<'a>,
-        http_client: Option<reqwest::Client>,
+        http_client: Option<reqwestplus::Client>,
     ) -> Result<Self, CapMonsterCloudClientError> {
         
         #[cfg(feature = "debug-output")]

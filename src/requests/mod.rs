@@ -4,7 +4,7 @@ use crate::error::SvcRequestError;
 use crate::requests::tasks_names::TaskReqTrait;
 use crate::responses::tasks_data::TaskTypeTrait;
 use crate::responses::{SvcRespTypeTrait, SvcResponse};
-use reqwest::{Client, StatusCode, Url};
+use reqwestplus::{Client, StatusCode, Url};
 use serde::de::DeserializeOwned;
 use serde::Serialize;
 use tracing::warn;

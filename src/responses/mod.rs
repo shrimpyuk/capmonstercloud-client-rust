@@ -1,6 +1,6 @@
 #![allow(non_snake_case)]
 
-use reqwest::StatusCode;
+use reqwestplus::StatusCode;
 use serde::de::DeserializeOwned;
 use serde::Deserialize;
 use std::fmt::Debug;
@@ -14,13 +14,13 @@ use crate::error::SvcResponseError;
 pub(crate) mod tasks_data;
 
 pub(crate) struct SvcResponse<T: SvcRespTypeTrait + DeserializeOwned> {
-    raw_resp: reqwest::Response,
+    raw_resp: reqwestplus::Response,
     #[allow(non_snake_case)]
     __: PhantomData<T>,
 }
 
 impl<T: SvcRespTypeTrait + DeserializeOwned> SvcResponse<T> {
-    pub(crate) fn new(raw_resp: reqwest::Response) -> Self {
+    pub(crate) fn new(raw_resp: reqwestplus::Response) -> Self {
         Self {
             raw_resp,
             __: PhantomData,
